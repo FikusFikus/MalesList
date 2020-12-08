@@ -26,8 +26,6 @@ namespace MalesList
                     for (int i = 0; i < array.Length; i++)
                     {
                         array[i] = srNames.ReadLine();
-                        //this.Array[i] = array[i];
-
                     }
                     srNames.Close();
                     return array;
@@ -49,7 +47,6 @@ namespace MalesList
                 {
                     string countyCode = "+7";
 
-
                     for (int i = 0; i < Array.Length; i++)
                     {
                         System.Threading.Thread.Sleep(25);
@@ -65,50 +62,30 @@ namespace MalesList
 
             static void Main(string[] args)
             {
-                //StreamWriter swNames = new StreamWriter("maleNames.txt");
-
-                //StreamReader srNames = new StreamReader("maleNames.txt");
-                //string[] names = new string[70];
-
-                //using (StreamReader srNames = new StreamReader("maleNames.txt", System.Text.Encoding.UTF8))
-                //{
-                //    int size = Convert.ToInt32(srNames.ReadLine());
-                //    string[] names = new string[size];
-                //    for (int i = 0; i < names.Length; i++)
-                //    {
-                //        names[i] = srNames.ReadLine();
-                //        Console.WriteLine(names[i]);
-                //    }
-                //}
-
                 MyArray names = new MyArray();
                 names.Array = names.ReadFromFile("maleNames.txt");
+
                 MyArray surnames = new MyArray();
                 surnames.Array = surnames.ReadFromFile("maleSurnames.txt");
+
                 MyArray phones = new MyArray();
                 phones.Array = new string[1000];
                 phones.Array = phones.CreatePhoneNumArray();
 
                 Random rnd = new Random();
-                string[] randomMales = new string[1000];
 
-                for (int i = 0; i < randomMales.Length; i++)
+                MyArray randomMales = new MyArray();
+
+                randomMales.Array = new string[1000];
+
+                for (int i = 0; i < randomMales.Array.Length; i++)
                 {
-                    randomMales[i] = $"{i + 1}. {names.Array[rnd.Next(0, names.Array.Length)]} {surnames.Array[rnd.Next(0, names.Array.Length)]}, телефон: {phones.Array[i]} ";
-                    Console.WriteLine(randomMales[i]);
+                    randomMales.Array[i] = $"{i + 1}. {names.Array[rnd.Next(0, names.Array.Length)]} {surnames.Array[rnd.Next(0, names.Array.Length)]}, телефон: {phones.Array[i]} ";
+                    Console.WriteLine(randomMales.Array[i]);
                 }
 
-                MyArray malesList = new MyArray();
-                malesList.Array = randomMales;
 
-                malesList.WriteToFile("malesList1.txt");
-                
-
-                
-
-
-
-                Console.WriteLine();
+                randomMales.WriteToFile("malesList1.txt");
 
                 Console.ReadLine();
             }
